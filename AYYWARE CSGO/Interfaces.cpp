@@ -131,7 +131,6 @@ namespace Interfaces
 	IGameEventManager2 *Interfaces::GameEventManager;
 	CInput* pInput;
 	IMDLCache* ModelCache;
-	IInputSystem* InputSystem;
 };
 
 #include <stdio.h>
