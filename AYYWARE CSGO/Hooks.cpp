@@ -45,7 +45,9 @@ typedef void(__thiscall* PaintTraverse_)(PVOID, unsigned int, bool, bool);
 typedef bool(__thiscall* InPrediction_)(PVOID);
 typedef void(__stdcall *FrameStageNotifyFn)(ClientFrameStage_t);
 typedef void(__thiscall* RenderViewFn)(void*, CViewSetup&, CViewSetup&, int, int);
-typedef MDLHandle_t(__thiscall *iFindMdl)(void*, char*);
+///////////IF YOU WANT CUSTOM MODELS, DELETE THE "//" BEFORE TYPEDEF/////////////////
+//typedef MDLHandle_t(__thiscall *iFindMdl)(void*, char*);
+///////////////////////////////////////////////////////////////////////////////////////
 
 using OverrideViewFn = void(__fastcall*)(void*, void*, CViewSetup*);
 typedef float(__stdcall *oGetViewModelFOV)();
@@ -88,11 +90,13 @@ namespace Hooks
 	Utilities::Memory::VMTManager VMTRenderView;
 	Utilities::Memory::VMTManager VMTModelCache;
 };
-
+///////////IF YOU WANT CUSTOM MODELS, DELETE THE "/*" AND THE "*/" FROM BELOW//////////////////
+/*
 typedef MDLHandle_t(__thiscall* iFindMdl)(void*, char*);
 iFindMdl oFindMDL;
 MDLHandle_t __fastcall hkFindMDL(void*, void*, char*);
-
+*/
+///////////////////////////////////////////////////////////////////////////////////////
 #include "GameEventManager.h"
 static float saveLastHeadshotFloat[65];
 static float saveLastBaimFloat[65];
@@ -284,9 +288,13 @@ void Hooks::Initialise()
 	round_end = new DamageEventListener(imfinnamemeu);
 	Interfaces::GameEventManager->AddListener(round_end, "player_death", false);
 	
+	///////////IF YOU WANT CUSTOM MODELS, DELETE THE "/*" AND THE "*/" FROM BELOW//////////////////
+	
+	/*
 	VMTModelCache.Initialise((DWORD*)Interfaces::ModelCache);
 	oFindMDL = (iFindMdl)VMTModelCache.HookMethod((DWORD)&hkFindMDL, 10);
-
+	*/
+////////////////////////////////////////////////////////////////////////////////////////
 	PlaySoundA("C:\\Hitmarker.wav", NULL, SND_FILENAME | SND_ASYNC);
 	Interfaces::Engine->ClientCmd_Unrestricted("clear");
 
@@ -746,7 +754,8 @@ std::string GetTimeString()
 }
 
 // Force new models
-MDLHandle_t __fastcall hkFindMDL(void* ecx, void* edx, char* FilePath)
+///////////IF YOU WANT CUSTOM MODELS, DELETE THE "/*" AND THE "*/" FROM BELOW//////////////////
+/*MDLHandle_t __fastcall hkFindMDL(void* ecx, void* edx, char* FilePath)
 {
 	
 	if (strstr(FilePath, "knife_default_ct.mdl"))
@@ -769,6 +778,9 @@ MDLHandle_t __fastcall hkFindMDL(void* ecx, void* edx, char* FilePath)
 		
 	return oFindMDL(ecx, FilePath);
 }
+*/
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 
 
