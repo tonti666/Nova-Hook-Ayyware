@@ -753,7 +753,7 @@ std::string GetTimeString()
 	return timeString;
 }
 
-// Force new models
+
 ///////////IF YOU WANT CUSTOM MODELS, DELETE THE "/*" AND THE "*/" FROM BELOW//////////////////
 /*MDLHandle_t __fastcall hkFindMDL(void* ecx, void* edx, char* FilePath)
 {
